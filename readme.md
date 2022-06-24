@@ -42,7 +42,7 @@
 
 RarePnT (Rare Places and Travel) is an AirBnB clone focused on helping people traveling find unique and uncommon tourist places and activities in specific locales.
 
-## [Live Site](https://rarepnt.heroku.com)
+## [Live Site](https://rarepnt.herokuapp.com)
 
 ## [RarePnT Wiki](https://github.com/Dave89rr/RarePnT/wiki/)
 
