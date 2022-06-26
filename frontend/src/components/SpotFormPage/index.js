@@ -33,88 +33,101 @@ function SpotFormPage() {
       latitude,
       longitude,
     };
+
+    setName('');
+    setAddress('');
+    setCity('');
+    setState('');
+    setCountry('');
+    setDescription('');
+    setLatitude('');
+    setLongitude('');
+
     return dispatch(addSpot(spot));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, id) => (
-          <li key={id}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Name
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Address
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        City
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        State
-        <input
-          type="text"
-          value={state}
-          onChange={(e) => setState(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Country
-        <input
-          type="text"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Description
-        <textarea
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Latitude
-        <input
-          type="text"
-          value={latitude}
-          onChange={(e) => setLatitude(e.target.value)}
-        />
-      </label>
-      <label>
-        Longitude
-        <input
-          type="text"
-          value={longitude}
-          onChange={(e) => setLongitude(e.target.value)}
-        />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+    <>
+      <h1>Spot Form</h1>
+      <form onSubmit={handleSubmit}>
+        <ul>
+          {errors.map((error, id) => (
+            <li key={id}>{error}</li>
+          ))}
+        </ul>
+        <label>
+          Name
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Address
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          City
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          State
+          <input
+            type="text"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Country
+          <input
+            type="text"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Description
+          <textarea
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Latitude
+          <input
+            type="text"
+            value={latitude}
+            onChange={(e) => setLatitude(e.target.value)}
+          />
+        </label>
+        <label>
+          Longitude
+          <input
+            type="text"
+            value={longitude}
+            onChange={(e) => setLongitude(e.target.value)}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 }
 

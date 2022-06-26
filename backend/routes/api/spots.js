@@ -38,10 +38,38 @@ const validateSpot = [
     .withMessage('Please provide a longitude'),
 ];
 
+//**************** GET ALL SPOTS ****************************//
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    res.send('hello, here is ya token');
+    const spots = await Spot.findAll();
+    return res.json(spots);
+  })
+);
+
+//**************** GET USER SPOTS****************************//
+router.get(
+  '/users/:id',
+  asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+    const spots = await Spot.findAll({
+      where: { userId: userId },
+      order: [['createdAt', 'DESC']],
+    });
+
+    // console.log(spots);
+    return res.json(spots);
+  })
+);
+
+//**************** GET SPECIFIC SPOT ************************//
+router.get(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const spotId = req.params.id;
+    const spot = await Spot.findByPk(spotId);
+
+    return res.json(spot);
   })
 );
 
@@ -55,6 +83,21 @@ router.post(
     const spot = await Spot.create(spotInfo);
 
     return res.send({ spot });
+  })
+);
+
+router.delete(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+
+    const delSpot = await Spot.findByPk(id);
+    try {
+      await delSpot.destroy();
+      res.send({ message: 'ok' });
+    } catch (e) {
+      res.status(500);
+    }
   })
 );
 

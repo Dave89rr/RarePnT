@@ -1,1 +1,8 @@
-/* TODO Add site wide styles */
+/* Temporary Style for functionality development */
+.li {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  width: 200px;
+  justify-content: space-between;
+}
