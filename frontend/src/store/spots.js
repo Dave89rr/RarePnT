@@ -65,15 +65,14 @@ export const removeSpotThunk = (spotId) => async (dispatch) => {
 
   dispatch(removeSpotAction(spotId));
 };
-export const editSpot = (spot) => async (dispatch) => {
-  const response = await csrfFetch('/api/spots', {
+export const editSpotThunk = (spot) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spot.id}`, {
     method: 'PUT',
     body: JSON.stringify(spot),
   });
 
-  const data = await response.json();
-
-  dispatch(editSpotAction(data.spot));
+  const { message, editSpot } = await response.json();
+  if (message === 'Edit Successful') dispatch(editSpotAction(editSpot));
 };
 
 const spotReducer = (state = {}, action) => {
@@ -94,17 +93,11 @@ const spotReducer = (state = {}, action) => {
       });
       return newState;
     case EDIT_SPOT:
+      newState[action.spot.id].spotData = action.spot;
       return newState;
-
     case REMOVE_SPOT:
-      console.log('**************************BEFORE');
-      console.log(newState);
-      console.log('***********************************after');
       delete newState[action.spotId];
-      console.log(newState);
-      console.log('*******************\n\n\n\n\n');
       return newState;
-
     default:
       return state;
   }

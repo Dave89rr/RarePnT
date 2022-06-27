@@ -86,6 +86,7 @@ router.post(
   })
 );
 
+//******************** DELETE SPOT **************************//
 router.delete(
   '/:id',
   asyncHandler(async (req, res) => {
@@ -101,4 +102,23 @@ router.delete(
   })
 );
 
+//******************** EDIT SPOT ****************************//
+router.put(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const editSpot = await Spot.findByPk(id);
+    editSpot.name = req.body.name;
+    editSpot.address = req.body.address;
+    editSpot.city = req.body.city;
+    editSpot.state = req.body.state;
+    editSpot.country = req.body.country;
+    editSpot.description = req.body.description;
+    editSpot.latitude = req.body.latitude;
+    editSpot.longitude = req.body.longitude;
+    editSpot.save();
+
+    res.send({ message: 'Edit Successful', editSpot });
+  })
+);
 module.exports = router;
