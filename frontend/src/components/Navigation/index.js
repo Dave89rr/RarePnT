@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import './Navigation.css';
+import classes from './Navigation.module.css';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -12,7 +12,6 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
         <NavLink to="/spotform"> New Spot </NavLink>
-        <NavLink to="/reviewform"> New Review </NavLink>
         <ProfileButton user={sessionUser} />
       </>
     );

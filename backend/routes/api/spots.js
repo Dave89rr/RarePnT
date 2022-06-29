@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { Spot } = require('../../db/models');
+const { Spot, Review, Image } = require('../../db/models');
 
 const router = express.Router();
 const { check } = require('express-validator');
@@ -42,7 +42,17 @@ const validateSpot = [
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const spots = await Spot.findAll();
+    const spots = await Spot.findAll({
+      include: [
+        {
+          model: Review,
+        },
+        {
+          model: Image,
+        },
+      ],
+    });
+
     return res.json(spots);
   })
 );
@@ -57,7 +67,6 @@ router.get(
       order: [['createdAt', 'DESC']],
     });
 
-    // console.log(spots);
     return res.json(spots);
   })
 );
@@ -67,7 +76,16 @@ router.get(
   '/:id',
   asyncHandler(async (req, res) => {
     const spotId = req.params.id;
-    const spot = await Spot.findByPk(spotId);
+    const spot = await Spot.findByPk(spotId, {
+      include: [
+        {
+          model: Review,
+        },
+        {
+          model: Image,
+        },
+      ],
+    });
 
     return res.json(spot);
   })

@@ -13,7 +13,7 @@ const validateRating = [
     .withMessage('Please provide a rating'),
 ];
 
-//******************** CREATE REVIEW **************************//
+//**************** CREATE REVIEW ****************************//
 router.post(
   '/',
   validateRating,
@@ -26,4 +26,33 @@ router.post(
   })
 );
 
+//**************** GET REVIEWS ******************************//
+// router.get(
+//   '/spot/:id',
+//   asyncHandler(async (req, res) => {
+//     const id = req.params.id;
+//     const reviews = await Review.findAll({
+//       where: {
+//         spotId: id,
+//       },
+//     });
+//     return res.send({ reviews });
+//   })
+// );
+
+//**************** REMOVE REVIEWS ***************************//
+router.delete(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const delReview = await Review.findByPk(id);
+
+    try {
+      await delReview.destroy();
+      res.send({ message: 'ok' });
+    } catch (e) {
+      res.status(500);
+    }
+  })
+);
 module.exports = router;

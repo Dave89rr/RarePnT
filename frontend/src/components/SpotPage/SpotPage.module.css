@@ -1,0 +1,20 @@
+.imgContainer {
+  display: flex;
+  flex-direction: row;
+}
+.spotImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 7px;
+  box-shadow: 10px 5px 5px black;
+  margin: 30px;
+  object-fit: cover;
+}
+
+.reviewContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .review {
+} */

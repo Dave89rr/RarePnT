@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { addSpot } from '../../store/spots';
 
 function SpotFormPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
@@ -43,7 +44,8 @@ function SpotFormPage() {
     setLatitude('');
     setLongitude('');
 
-    return dispatch(addSpot(spot));
+    dispatch(addSpot(spot));
+    history.push('/');
   };
 
   return (
