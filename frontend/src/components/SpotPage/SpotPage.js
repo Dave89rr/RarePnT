@@ -9,6 +9,7 @@ import {
 import EditSpotForm from '../EditSpotForm';
 import ReviewFormPage from '../ReviewFormPage';
 import classes from './SpotPage.module.css';
+import parsedUrl from '../../utils';
 
 function SpotPage() {
   const history = useHistory();
@@ -72,6 +73,9 @@ function SpotPage() {
         </li>
         <li key={`${spotInfo.spotData.longitude}-long`}>
           {spotInfo.spotData.longitude}
+        </li>
+        <li>
+          <a href={`${parsedUrl(spotInfo.spotData)}`}>See on Google Maps</a>
         </li>
       </ul>
       {sessionUser && sessionUser.id === spotInfo.spotData.userId && (
