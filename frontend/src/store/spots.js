@@ -124,8 +124,12 @@ export const addReviewThunk = (review, spotId) => async (dispatch) => {
   });
 
   const data = await response.json();
-
-  dispatch(addReviewAction({ review: data.review, spotId }));
+  if (data.message === undefined) {
+    console.log(data);
+    dispatch(addReviewAction({ review: data.review, spotId }));
+  } else {
+    return null;
+  }
   return null;
 };
 
@@ -189,11 +193,8 @@ const spotReducer = (state = {}, action) => {
       delete newState[action.spotId];
       return newState;
     case ADD_REVIEW:
-      console.log('*********************************');
-      console.log(action);
-      console.log('*********************************');
-      // newState[action.payload.spotId].reviews[action.payload.review.reviewId] =
-      // action.payload.review.reviewId;
+      newState[action.payload.spotId].reviews[action.payload.review.id] =
+        action.payload.review;
       return newState;
     case REMOVE_REVIEW:
       delete newState[action.payload.spotId].reviews[action.payload.reviewId];

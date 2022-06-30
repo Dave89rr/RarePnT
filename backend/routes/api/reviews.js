@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { Review } = require('../../db/models');
+const { Review, User } = require('../../db/models');
 
 const router = express.Router();
 const { check } = require('express-validator');
@@ -20,9 +20,28 @@ router.post(
   asyncHandler(async (req, res) => {
     const ratingInfo = req.body;
 
-    const review = await Review.create(ratingInfo);
+    const check = await Review.findOne({
+      where: {
+        userId: ratingInfo.userId,
+        spotId: ratingInfo.spotId,
+      },
+    });
 
-    return res.send({ review });
+    let review;
+    if (check === null) {
+      const newReview = await Review.create(ratingInfo);
+
+      review = await Review.findByPk(newReview.id, {
+        include: {
+          model: User,
+          attribute: User.username,
+        },
+      });
+
+      return res.send({ review });
+    } else {
+      return res.send({ message: 'User already reviewed spot' });
+    }
   })
 );
 

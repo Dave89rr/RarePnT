@@ -147,4 +147,5 @@ router.put(
     res.send({ message: 'Edit Successful', editSpot });
   })
 );
+
 module.exports = router;
