@@ -2,8 +2,10 @@ import { csrfFetch } from './csrf';
 //**************** SPOT ACTION STRING LITERALS **************//
 // Create
 const ADD_SPOT = 'spot/ADD_SPOT';
-// Read
-const GET_SPOT = 'spot/GET_SPOT';
+// Read all
+const GET_ALL_SPOTS = 'spot/GET_ALL_SPOTS';
+// Read One
+const GET_ONE_SPOT = 'spot/GET_ONE_SPOT';
 // Update
 const EDIT_SPOT = 'spot/EDIT_SPOT';
 // Delete
@@ -26,7 +28,14 @@ const addSpotAction = (spot) => {
 
 const getSpotAction = (spot) => {
   return {
-    type: GET_SPOT,
+    type: GET_ALL_SPOTS,
+    spot,
+  };
+};
+
+const getOneSpotAction = (spot) => {
+  return {
+    type: GET_ONE_SPOT,
     spot,
   };
 };
@@ -45,6 +54,21 @@ const removeSpotAction = (spotId) => {
   };
 };
 
+//**************** REVIEW ACTIONS ***************************//
+const addReviewAction = (payload) => {
+  return {
+    type: ADD_REVIEW,
+    payload,
+  };
+};
+
+const removeReviewAction = (payload) => {
+  return {
+    type: REMOVE_REVIEW,
+    payload,
+  };
+};
+
 //**************** SPOT THUNKS ******************************//
 export const addSpot = (spot) => async (dispatch) => {
   const response = await csrfFetch('/api/spots', {
@@ -57,19 +81,6 @@ export const addSpot = (spot) => async (dispatch) => {
   dispatch(addSpotAction(data.spot));
   return null;
 };
-const addReviewAction = (review) => {
-  return {
-    type: ADD_REVIEW,
-    review,
-  };
-};
-
-const removeReviewAction = (payload) => {
-  return {
-    type: REMOVE_REVIEW,
-    payload,
-  };
-};
 
 export const getSpotThunk = () => async (dispatch) => {
   const response = await csrfFetch('/api/spots');
@@ -79,11 +90,11 @@ export const getSpotThunk = () => async (dispatch) => {
   return null;
 };
 
-export const getSpecificSpotThunk = () => async (dispatch) => {
-  const response = await csrfFetch('/api/spots');
+export const getOneSpotThunk = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${id}`);
 
   const data = await response.json();
-  dispatch(getSpotAction(data));
+  dispatch(getOneSpotAction(data));
   return null;
 };
 
@@ -114,7 +125,7 @@ export const addReviewThunk = (review, spotId) => async (dispatch) => {
 
   const data = await response.json();
 
-  dispatch(addReviewAction(data.review));
+  dispatch(addReviewAction({ review: data.review, spotId }));
   return null;
 };
 
@@ -128,7 +139,7 @@ export const removeReviewThunk = (reviewId, spotId) => async (dispatch) => {
 
 //**************** SPOT + REVIEWS REDUCER *******************//
 const spotReducer = (state = {}, action) => {
-  let newState = Object.assign({}, state);
+  let newState = JSON.parse(JSON.stringify(state));
   let id;
   switch (action.type) {
     case ADD_SPOT:
@@ -139,7 +150,7 @@ const spotReducer = (state = {}, action) => {
         images: {},
       };
       return newState;
-    case GET_SPOT:
+    case GET_ALL_SPOTS:
       action.spot.forEach((spot) => {
         const reviewsArr = spot.Reviews;
         const reviews = {};
@@ -156,6 +167,21 @@ const spotReducer = (state = {}, action) => {
         };
       });
       return newState;
+    case GET_ONE_SPOT:
+      const reviewsArr = action.spot.Reviews;
+      const reviews = {};
+      const imgArr = action.spot.Images;
+      const images = {};
+      reviewsArr.forEach((review) => (reviews[review.id] = review));
+      imgArr.forEach((img) => (images[img.id] = img));
+      delete action.spot.Reviews;
+      delete action.spot.Images;
+      newState[action.spot.id] = {
+        spotData: action.spot,
+        reviews,
+        images,
+      };
+      return newState;
     case EDIT_SPOT:
       newState[action.spot.id].spotData = action.spot;
       return newState;
@@ -163,9 +189,9 @@ const spotReducer = (state = {}, action) => {
       delete newState[action.spotId];
       return newState;
     case ADD_REVIEW:
-      // console.log('*********************************');
-      // console.log(action.payload.review);
-      // console.log('*********************************');
+      console.log('*********************************');
+      console.log(action);
+      console.log('*********************************');
       // newState[action.payload.spotId].reviews[action.payload.review.reviewId] =
       // action.payload.review.reviewId;
       return newState;

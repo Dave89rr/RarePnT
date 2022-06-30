@@ -1,9 +1,8 @@
-//SpotPage.js copy
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import {
-  getSpotThunk,
+  getOneSpotThunk,
   removeSpotThunk,
   removeReviewThunk,
 } from '../../store/spots';
@@ -19,20 +18,10 @@ function SpotPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const spotInfo = useSelector((state) => state.spots[id]);
-  let spot;
-  let reviews;
-  let images;
-  try {
-    spot = spotInfo.spotData;
-    reviews = Object.values(spotInfo.reviews);
-    images = Object.values(spotInfo.images);
-  } catch (e) {
-    // temporary fix, need to come back and remove this try /catch
-  }
 
   useEffect(() => {
-    dispatch(getSpotThunk());
-  }, [dispatch]);
+    dispatch(getOneSpotThunk(id));
+  }, [dispatch, id]);
 
   const handleDelete = () => {
     dispatch(removeSpotThunk(id));
@@ -43,70 +32,91 @@ function SpotPage() {
     setReviewOpen(true);
   };
   const handleReviewDelete = (id) => {
-    dispatch(removeReviewThunk(id, spot.id));
+    dispatch(removeReviewThunk(id, spotInfo.spotData.id));
   };
 
-  if (spot)
-    return (
-      <div className="">
-        <h1>{spot.name}</h1>
-        <div className={classes.imgContainer}>
-          {images.map((img) => {
+  if (!spotInfo) return <p>Loading...</p>;
+  return (
+    <div className="">
+      <h1>{spotInfo.spotData.name}</h1>
+      <div className={classes.imgContainer}>
+        {spotInfo &&
+          spotInfo.images &&
+          Object.values(spotInfo.images).map((img) => {
             return (
               <img
                 src={img.url}
                 key={img.id}
                 className={classes.spotImage}
-                alt={spot.name}
+                alt={spotInfo.spotData.name}
               />
             );
           })}
-        </div>
-        <ul>
-          <li key={spot.description}>{spot.description}</li>
-          <li key={`${spot.address}-addres`}>{spot.address}</li>
-          <li key={`${spot.city}-city`}>{spot.city}</li>
-          <li key={`${spot.state}-state`}>{spot.state}</li>
-          <li key={`${spot.country}-country`}>{spot.country}</li>
-          <li key={`${spot.latitude}-lat`}>{spot.latitude}</li>
-          <li key={`${spot.longitude}-long`}>{spot.longitude}</li>
-        </ul>
-        {sessionUser && sessionUser.id === spot.userId && (
-          <>
-            <button onClick={handleDelete}>DELETE</button>
-            <button
-              onClick={() => {
-                setEditOpen(true);
-              }}
-            >
-              Edit
-            </button>
-          </>
-        )}
-        {sessionUser && <button onClick={handleReview}>Review</button>}
-        {editOpen && <EditSpotForm spot={spot} setEditOpen={setEditOpen} />}
-        {reviewOpen && (
-          <ReviewFormPage spot={spot} setReviewOpen={setReviewOpen} />
-        )}
-        <div className={classes.reviewContainer}>
-          {reviews.map((review) => {
-            return (
-              <div className={classes.review} key={review.id}>
-                <h2>{review.rating}/5</h2>
-                <p>{review.review}</p>
-                {sessionUser && sessionUser.id === review.userId && (
-                  <>
-                    <button onClick={() => handleReviewDelete(review.id)}>
-                      DELETE
-                    </button>
-                  </>
-                )}
-              </div>
-            );
-          })}
-        </div>
       </div>
-    );
+      <ul>
+        <li key={spotInfo.spotData.description}>
+          {spotInfo.spotData.description}
+        </li>
+        <li key={`${spotInfo.spotData.address}-addres`}>
+          {spotInfo.spotData.address}
+        </li>
+        <li key={`${spotInfo.spotData.city}-city`}>{spotInfo.spotData.city}</li>
+        <li key={`${spotInfo.spotData.state}-state`}>
+          {spotInfo.spotData.state}
+        </li>
+        <li key={`${spotInfo.spotData.country}-country`}>
+          {spotInfo.spotData.country}
+        </li>
+        <li key={`${spotInfo.spotData.latitude}-lat`}>
+          {spotInfo.spotData.latitude}
+        </li>
+        <li key={`${spotInfo.spotData.longitude}-long`}>
+          {spotInfo.spotData.longitude}
+        </li>
+      </ul>
+      {sessionUser && sessionUser.id === spotInfo.spotData.userId && (
+        <>
+          <button onClick={handleDelete}>DELETE</button>
+          <button
+            onClick={() => {
+              setEditOpen(true);
+            }}
+          >
+            Edit
+          </button>
+        </>
+      )}
+      {sessionUser && <button onClick={handleReview}>Review</button>}
+      {editOpen && (
+        <EditSpotForm spot={spotInfo.spotData} setEditOpen={setEditOpen} />
+      )}
+      {reviewOpen && (
+        <ReviewFormPage
+          spot={spotInfo.spotData}
+          setReviewOpen={setReviewOpen}
+        />
+      )}
+      <div className={classes.reviewContainer}>
+        {Object.values(spotInfo.reviews).map((review) => {
+          return (
+            <div className={classes.review} key={review.id}>
+              <h2>
+                {review.User.username} - {review.rating}/5
+              </h2>
+              <p>{review.review}</p>
+              {sessionUser && sessionUser.id === review.userId && (
+                <>
+                  <button onClick={() => handleReviewDelete(review.id)}>
+                    DELETE
+                  </button>
+                </>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 export default SpotPage;

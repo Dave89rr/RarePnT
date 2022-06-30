@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { Spot, Review, Image } = require('../../db/models');
+const { Spot, Review, Image, User } = require('../../db/models');
 
 const router = express.Router();
 const { check } = require('express-validator');
@@ -46,6 +46,10 @@ router.get(
       include: [
         {
           model: Review,
+          include: {
+            model: User,
+            attribute: User.username,
+          },
         },
         {
           model: Image,
@@ -80,6 +84,10 @@ router.get(
       include: [
         {
           model: Review,
+          include: {
+            model: User,
+            attribute: User.username,
+          },
         },
         {
           model: Image,
