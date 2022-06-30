@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
-import { addSpot } from '../../store/spots';
+import { addSpot } from '../../../store/spots';
 
-function SpotFormPage() {
+function SpotForm() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
@@ -133,4 +133,4 @@ function SpotFormPage() {
   );
 }
 
-export default SpotFormPage;
+export default SpotForm;

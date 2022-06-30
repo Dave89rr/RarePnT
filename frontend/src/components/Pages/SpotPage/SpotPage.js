@@ -5,11 +5,11 @@ import {
   getOneSpotThunk,
   removeSpotThunk,
   removeReviewThunk,
-} from '../../store/spots';
-import EditSpotForm from '../EditSpotForm';
-import ReviewFormPage from '../ReviewFormPage';
+} from '../../../store/spots';
+import EditSpotForm from '../../Forms/EditSpotForm';
+import ReviewFormPage from '../../Forms/ReviewForm';
 import classes from './SpotPage.module.css';
-import parsedUrl from '../../utils';
+import parsedUrl from '../../../utils';
 
 function SpotPage() {
   const history = useHistory();

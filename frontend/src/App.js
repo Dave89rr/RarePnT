@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import LoginFormPage from './components/LoginFormPage';
-import SignupFormPage from './components/SignupFormPage';
+import LoginFormPage from './components/Forms/LoginForm';
+import SignupForm from './components/Forms/SignupForm';
 import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
-import SpotFormPage from './components/SpotFormPage';
-import ReviewFormPage from './components/ReviewFormPage';
-import EditSpotForm from './components/EditSpotForm';
-import HomePage from './components/Homepage';
-import SpotPage from './components/SpotPage';
+import SpotForm from './components/Forms/SpotForm';
+import AddReviewForm from './components/Forms/ReviewForm';
+import EditSpotForm from './components/Forms/EditSpotForm';
+import HomePage from './components/Pages/Homepage';
+import SpotPage from './components/Pages/SpotPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,13 +30,13 @@ function App() {
             <LoginFormPage />
           </Route>
           <Route path="/signup">
-            <SignupFormPage />
+            <SignupForm />
           </Route>
           <Route path="/spotform">
-            <SpotFormPage />
+            <SpotForm />
           </Route>
           <Route path="/reviewform">
-            <ReviewFormPage />
+            <AddReviewForm />
           </Route>
           <Route path="/editspot">
             <EditSpotForm />

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSpotThunk } from '../../store/spots';
+import { getSpotThunk } from '../../../store/spots';
 import classes from './Homepage.module.css';
 
 function HomePage() {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addReviewThunk } from '../../store/spots';
+import { addReviewThunk } from '../../../store/spots';
 
-function ReviewFormPage({ spot, setReviewOpen }) {
+function AddReviewForm({ spot, setReviewOpen }) {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [rating, setRating] = useState('');
@@ -53,4 +53,4 @@ function ReviewFormPage({ spot, setReviewOpen }) {
   );
 }
 
-export default ReviewFormPage;
+export default AddReviewForm;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
-import { editSpotThunk } from '../../store/spots';
+import { editSpotThunk } from '../../../store/spots';
 
 function EditSpotForm({ spot, setEditOpen }) {
   const dispatch = useDispatch();
