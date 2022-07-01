@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { addSpot } from '../../store/spots';
+import { Redirect, useParams } from 'react-router-dom';
+import { editSpotThunk } from '../../../store/spots';
 
-function SpotFormPage() {
+function EditSpotForm({ spot, setEditOpen }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-  const [description, setDescription] = useState('');
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
+  const [name, setName] = useState(spot.name);
+  const [address, setAddress] = useState(spot.address);
+  const [city, setCity] = useState(spot.city);
+  const [state, setState] = useState(spot.state);
+  const [country, setCountry] = useState(spot.country);
+  const [description, setDescription] = useState(spot.description);
+  const [latitude, setLatitude] = useState(spot.latitude);
+  const [longitude, setLongitude] = useState(spot.longitude);
   const [errors, setErrors] = useState([]);
+  const { id } = useParams();
 
   if (!sessionUser) return <Redirect to="/" />;
 
@@ -23,6 +24,7 @@ function SpotFormPage() {
     // TODO - Validation Errors
     setErrors([]);
     const spot = {
+      id,
       userId: sessionUser.id,
       name,
       address,
@@ -34,21 +36,18 @@ function SpotFormPage() {
       longitude,
     };
 
-    setName('');
-    setAddress('');
-    setCity('');
-    setState('');
-    setCountry('');
-    setDescription('');
-    setLatitude('');
-    setLongitude('');
-
-    return dispatch(addSpot(spot));
+    dispatch(editSpotThunk(spot));
+    setEditOpen(false);
+    return;
+  };
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setEditOpen(false);
   };
 
   return (
     <>
-      <h1>Spot Form</h1>
+      <h1>EDIT Spot</h1>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, id) => (
@@ -126,9 +125,10 @@ function SpotFormPage() {
           />
         </label>
         <button type="submit">Submit</button>
+        <button onClick={() => handleCancel}>Cancel</button>
       </form>
     </>
   );
 }
 
-export default SpotFormPage;
+export default EditSpotForm;

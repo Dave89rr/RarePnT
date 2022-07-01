@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { Spot } = require('../../db/models');
+const { Spot, Review, Image, User } = require('../../db/models');
 
 const router = express.Router();
 const { check } = require('express-validator');
@@ -42,7 +42,21 @@ const validateSpot = [
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const spots = await Spot.findAll();
+    const spots = await Spot.findAll({
+      include: [
+        {
+          model: Review,
+          include: {
+            model: User,
+            attribute: User.username,
+          },
+        },
+        {
+          model: Image,
+        },
+      ],
+    });
+
     return res.json(spots);
   })
 );
@@ -57,7 +71,6 @@ router.get(
       order: [['createdAt', 'DESC']],
     });
 
-    // console.log(spots);
     return res.json(spots);
   })
 );
@@ -67,7 +80,20 @@ router.get(
   '/:id',
   asyncHandler(async (req, res) => {
     const spotId = req.params.id;
-    const spot = await Spot.findByPk(spotId);
+    const spot = await Spot.findByPk(spotId, {
+      include: [
+        {
+          model: Review,
+          include: {
+            model: User,
+            attribute: User.username,
+          },
+        },
+        {
+          model: Image,
+        },
+      ],
+    });
 
     return res.json(spot);
   })
@@ -86,6 +112,7 @@ router.post(
   })
 );
 
+//******************** DELETE SPOT **************************//
 router.delete(
   '/:id',
   asyncHandler(async (req, res) => {
@@ -98,6 +125,26 @@ router.delete(
     } catch (e) {
       res.status(500);
     }
+  })
+);
+
+//******************** EDIT SPOT ****************************//
+router.put(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const editSpot = await Spot.findByPk(id);
+    editSpot.name = req.body.name;
+    editSpot.address = req.body.address;
+    editSpot.city = req.body.city;
+    editSpot.state = req.body.state;
+    editSpot.country = req.body.country;
+    editSpot.description = req.body.description;
+    editSpot.latitude = req.body.latitude;
+    editSpot.longitude = req.body.longitude;
+    editSpot.save();
+
+    res.send({ message: 'Edit Successful', editSpot });
   })
 );
 

@@ -1,0 +1,58 @@
+.spotCardContainer {
+  width: 300.8px;
+  height: 385.75px;
+  /* margin: 12.5px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 285px;
+  width: 300px;
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.image {
+  object-fit: cover;
+  object-position: 50%;
+  width: 100%;
+  height: 285px;
+}
+
+.spotTitleContainer {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* border: 2px solid red; */
+}
+.text {
+  text-decoration: none;
+  color: #717171;
+}
+
+/* p {
+  text-align: center;
+} */
+
+.location {
+  color: #222222;
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+span {
+}
+
+.star {
+  height: 12px;
+  width: 12px;
+}

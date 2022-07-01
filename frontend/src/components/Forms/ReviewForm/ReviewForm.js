@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { addReviewThunk } from '../../store/reviews';
+import { addReviewThunk } from '../../../store/spots';
 
-function ReviewFormPage(props) {
-  const dispatch = useDispatch();
+function AddReviewForm({ spot, setReviewOpen }) {
   const sessionUser = useSelector((state) => state.session.user);
-  // Missing Spot Id. pass through props useParam to detect spot ID
-  const spotInfo = useSelector((state) => state.spot);
+  const dispatch = useDispatch();
   const [rating, setRating] = useState('');
   const [review, setReview] = useState('');
   const [errors, setErrors] = useState([]);
-
-  if (!sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // TODO - Validation Errors
     setErrors([]);
     const reviewInput = {
-      user: sessionUser,
-      spotId: 52,
+      userId: sessionUser.id,
+      spotId: spot.id,
       rating,
       review,
     };
-    return dispatch(addReviewThunk(reviewInput));
+    dispatch(addReviewThunk(reviewInput, spot.id));
+    setReviewOpen(false);
   };
 
   return (
@@ -57,4 +53,4 @@ function ReviewFormPage(props) {
   );
 }
 
-export default ReviewFormPage;
+export default AddReviewForm;
