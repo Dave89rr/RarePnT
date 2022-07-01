@@ -59,4 +59,42 @@ const parsedUrl = (spot) => {
 // return `${baseUrl}${latitude}+${longitude}`;
 //https://www.google.com/maps/place/44°16'42.2"N+124°06'48.6"W
 
+export const calcAvgRating = (reviewObj) => {
+  let avg = 0;
+  const reviews = Object.values(reviewObj);
+  if (reviews.length > 0) {
+    reviews.forEach((review) => {
+      avg += parseInt(review.rating, 10);
+    });
+    return `${(avg / reviews.length).toFixed(2)} `;
+  }
+  return 'New ';
+};
+
+export const calcDistance = (userCoords, spotCoords) => {
+  if (userCoords === undefined) return '';
+  let userLatRads = (userCoords.yourLat * Math.PI) / 180;
+  let userLonRads = (userCoords.yourLon * Math.PI) / 180;
+  let spotLatRads = (spotCoords.lat * Math.PI) / 180;
+  let spotLonRads = (spotCoords.lon * Math.PI) / 180;
+
+  let latDiff = spotLatRads - userLatRads;
+  let lonDiff = spotLonRads - userLonRads;
+
+  const a =
+    Math.pow(Math.sin(latDiff / 2), 2) +
+    Math.cos(userLatRads) *
+      Math.cos(spotLonRads) *
+      Math.pow(Math.sin(lonDiff / 2), 2);
+
+  const c = 2 * Math.asin(Math.sqrt(Math.abs(a)));
+  const r = 6371; // radius of earth mi
+  const distance = (r * c).toFixed(0);
+  if (distance !== 'NaN') {
+    return `Approx. ${parseInt(distance, 10)} miles away`;
+  } else {
+    return '';
+  }
+};
+
 export default parsedUrl;
