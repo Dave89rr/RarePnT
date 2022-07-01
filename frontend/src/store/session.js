@@ -60,7 +60,12 @@ const sessionReducer = (state = initialState, action) => {
       return newState;
     case SET_USER_LOCATION:
       newState = Object.assign({}, state);
-      newState.user.location = action.location;
+      if (newState.user !== undefined && newState.user !== null) {
+        newState.user.location = action.location;
+      } else {
+        localStorage.setItem('yourLat', action.location.yourLat);
+        localStorage.setItem('yourLon', action.location.yourLon);
+      }
       return newState;
     default:
       return state;
