@@ -5,3 +5,11 @@
   width: 200px;
   justify-content: space-between;
 }
+
+.cardsContainer {
+  padding-top: 17px;
+  width: 1600px;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
