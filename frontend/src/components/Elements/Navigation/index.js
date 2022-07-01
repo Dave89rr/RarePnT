@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <>
-        <NavLink to="/spotform">Create a Spot</NavLink>
+        <NavLink to="/spotform">Become a Host</NavLink>
         <ProfileButton user={sessionUser} />
       </>
     );
@@ -25,14 +25,21 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          Home
-        </NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <nav className={classes.navBar}>
+      <div className={classes.navContainer}>
+        <div>
+          <NavLink to="/">
+            <img
+              className={classes.navLogo}
+              src="/media/logo.svg"
+              alt="rarepnt logo"
+            ></img>
+          </NavLink>
+        </div>
+        <div></div>
+        <div>{isLoaded && sessionLinks}</div>
+      </div>
+    </nav>
   );
 }
 

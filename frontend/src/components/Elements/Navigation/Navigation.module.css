@@ -1,0 +1,24 @@
+.navBar {
+  height: 80px;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: lightgray;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.navContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  width: 1600px;
+  justify-content: space-between;
+  border: 2px solid red;
+}
+
+.navLogo {
+  height: 32px;
+}
