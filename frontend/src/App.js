@@ -14,6 +14,21 @@ import SpotPage from './components/Pages/SpotPage';
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const storeLocation = (location) => {
+    const params = {
+      yourLat: location.coords.latitude,
+      yourLon: location.coords.longitude,
+    };
+
+    dispatch(sessionActions.setLocation(params));
+  };
+
+  navigator.geolocation.getCurrentPosition(
+    storeLocation,
+    (err) => console.log(err),
+    { timeout: 10000 }
+  );
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);

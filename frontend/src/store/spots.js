@@ -125,7 +125,6 @@ export const addReviewThunk = (review, spotId) => async (dispatch) => {
 
   const data = await response.json();
   if (data.message === undefined) {
-    console.log(data);
     dispatch(addReviewAction({ review: data.review, spotId }));
   } else {
     return null;

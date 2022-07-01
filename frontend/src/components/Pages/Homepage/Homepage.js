@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpotThunk } from '../../../store/spots';
 import classes from './Homepage.module.css';
@@ -23,9 +23,8 @@ function HomePage() {
       {/* <ul> */}
       {spotsArray.map((spot) => {
         return (
-          <Link key={spot.spotData.id} to={`/spots/${spot.spotData.id}`}>
-            <SpotCard spot={spot} />
-          </Link>
+          // <Link key={spot.spotData.id} to={`/spots/${spot.spotData.id}`}>
+          <SpotCard spot={spot} />
 
           // <div className={classes.li} key={spot.id}>
           //   <Link to={`/spots/${spot.id}`}>

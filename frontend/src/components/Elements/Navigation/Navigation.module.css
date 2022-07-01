@@ -7,7 +7,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 1px solid lightgray;
+  border: 1px solid #ebebeb;
 }
 
 .navContainer {

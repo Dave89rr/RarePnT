@@ -38,7 +38,9 @@ function Navigation({ isLoaded }) {
             ></img>
           </NavLink>
         </div>
-        <div>[MISSING COMPONENT HERE]</div>
+        <div>
+          <p>[MISSING COMPONENT HERE]</p>
+        </div>
         <div>{isLoaded && sessionLinks}</div>
       </div>
     </nav>

@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const SET_USER_LOCATION = 'session/SET_USER_LOCATION';
 
 const setUser = (user) => {
   return {
@@ -13,6 +14,13 @@ const setUser = (user) => {
 const removeUser = () => {
   return {
     type: REMOVE_USER,
+  };
+};
+
+export const setLocation = (location) => {
+  return {
+    type: SET_USER_LOCATION,
+    location,
   };
 };
 
@@ -49,6 +57,10 @@ const sessionReducer = (state = initialState, action) => {
     case REMOVE_USER:
       newState = Object.assign({}, state);
       newState.user = null;
+      return newState;
+    case SET_USER_LOCATION:
+      newState = Object.assign({}, state);
+      newState.user.location = action.location;
       return newState;
     default:
       return state;

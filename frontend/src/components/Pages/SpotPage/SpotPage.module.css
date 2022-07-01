@@ -18,3 +18,12 @@
 
 /* .review {
 } */
+a {
+  /* color: blue;
+  text-decoration: underline; */
+}
+
+.mapsUrl {
+  text-decoration: underline;
+  color: blue;
+}

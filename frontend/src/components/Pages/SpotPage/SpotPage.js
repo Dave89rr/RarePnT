@@ -75,7 +75,12 @@ function SpotPage() {
           {spotInfo.spotData.longitude}
         </li>
         <li>
-          <a href={`${parsedUrl(spotInfo.spotData)}`}>See on Google Maps</a>
+          <a
+            className={classes.mapsUrl}
+            href={`${parsedUrl(spotInfo.spotData)}`}
+          >
+            See on Google Maps
+          </a>
         </li>
       </ul>
       {sessionUser && sessionUser.id === spotInfo.spotData.userId && (
