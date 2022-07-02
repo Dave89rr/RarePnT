@@ -10,6 +10,7 @@ import EditSpotForm from '../../Forms/EditSpotForm';
 import ReviewFormPage from '../../Forms/ReviewForm';
 import classes from './SpotPage.module.css';
 import parsedUrl from '../../../utils';
+import SpotPageImages from '../../Elements/SpotPageImages/SpotPageImages';
 
 function SpotPage() {
   const history = useHistory();
@@ -41,9 +42,9 @@ function SpotPage() {
     <div className="">
       <h1>{spotInfo.spotData.name}</h1>
       <div className={classes.imgContainer}>
-        {spotInfo &&
-          spotInfo.images &&
-          Object.values(spotInfo.images).map((img) => {
+        {
+          spotInfo && spotInfo.images && <SpotPageImages id={id} />
+          /* Object.values(spotInfo.images).map((img) => {
             return (
               <img
                 src={img.url}
@@ -52,7 +53,8 @@ function SpotPage() {
                 alt={spotInfo.spotData.name}
               />
             );
-          })}
+          }) */
+        }
       </div>
       <ul>
         <li key={spotInfo.spotData.description}>
