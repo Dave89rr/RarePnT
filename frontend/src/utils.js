@@ -1,3 +1,4 @@
+// Degree Decimal to Degree Minutes Seconds format
 const ddtodms = (inputNumber) => {
   //   console.log('input', inputNumber);
   const number = parseFloat(inputNumber);

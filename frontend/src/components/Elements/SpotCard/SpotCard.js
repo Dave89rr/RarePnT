@@ -17,8 +17,14 @@ function SpotCard({ spot }) {
     images = Object.values(spot.images)[0].url;
   }
 
-  if (!sessionUser) return '';
-  const userCoords = sessionUser.location;
+  let userCoords;
+  if (!sessionUser) {
+    let yourLat = localStorage.getItem('yourLat');
+    let yourLon = localStorage.getItem('yourLon');
+    userCoords = { yourLat, yourLon };
+  } else {
+    userCoords = sessionUser.location;
+  }
 
   const spotCoords = {
     lat: spot.spotData.latitude,

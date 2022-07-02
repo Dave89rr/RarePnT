@@ -10,18 +10,22 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <div className={classes.userInteraction}>
+      <>
         <NavLink className={classes.link} to="/spotform">
           Become a Host
         </NavLink>
         <ProfileButton user={sessionUser} />
-      </div>
+      </>
     );
   } else {
     sessionLinks = (
       <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink className={classes.link} to="/login">
+          Log In
+        </NavLink>
+        <NavLink className={classes.link} to="/signup">
+          Sign Up
+        </NavLink>
       </>
     );
   }
@@ -41,7 +45,9 @@ function Navigation({ isLoaded }) {
         <div>
           <p>[MISSING COMPONENT HERE]</p>
         </div>
-        <div>{isLoaded && sessionLinks}</div>
+        <div className={classes.userInteraction}>
+          {isLoaded && sessionLinks}
+        </div>
       </div>
     </nav>
   );
