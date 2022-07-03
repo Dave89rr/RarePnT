@@ -11,6 +11,7 @@ import ReviewFormPage from '../../Forms/ReviewForm';
 import classes from './SpotPage.module.css';
 import parsedUrl from '../../../utils';
 import SpotPageImages from '../../Elements/SpotPageImages/SpotPageImages';
+import { calcAvgRating } from '../../../utils';
 
 function SpotPage() {
   const history = useHistory();
@@ -40,74 +41,107 @@ function SpotPage() {
   if (!spotInfo) return <p>Loading...</p>;
   return (
     <div className="">
-      <h1>{spotInfo.spotData.name}</h1>
-      <div className={classes.imgContainer}>
-        {
-          spotInfo && spotInfo.images && <SpotPageImages id={id} />
-          /* Object.values(spotInfo.images).map((img) => {
-            return (
-              <img
-                src={img.url}
-                key={img.id}
-                className={classes.spotImage}
-                alt={spotInfo.spotData.name}
-              />
-            );
-          }) */
-        }
-      </div>
-      <ul>
-        <li key={spotInfo.spotData.description}>
-          {spotInfo.spotData.description}
-        </li>
-        <li key={`${spotInfo.spotData.address}-addres`}>
-          {spotInfo.spotData.address}
-        </li>
-        <li key={`${spotInfo.spotData.city}-city`}>{spotInfo.spotData.city}</li>
-        <li key={`${spotInfo.spotData.state}-state`}>
-          {spotInfo.spotData.state}
-        </li>
-        <li key={`${spotInfo.spotData.country}-country`}>
+      <h1 className={classes.spotTitle}>{spotInfo.spotData.name}</h1>
+      <div className={classes.quickInfo}>
+        <span>
+          <img
+            className={classes.star}
+            src="/media/star.svg"
+            alt="spot's star rating icon"
+          ></img>{' '}
+          {calcAvgRating(spotInfo.reviews)}
+          {' · '}
+          {Object.values(spotInfo.reviews).length} reviews
+          {' · '}
+          {spotInfo.spotData.city}, {spotInfo.spotData.state},{' '}
           {spotInfo.spotData.country}
-        </li>
-        <li key={`${spotInfo.spotData.latitude}-lat`}>
-          {spotInfo.spotData.latitude}
-        </li>
-        <li key={`${spotInfo.spotData.longitude}-long`}>
-          {spotInfo.spotData.longitude}
-        </li>
-        <li>
-          <a
-            className={classes.mapsUrl}
-            href={`${parsedUrl(spotInfo.spotData)}`}
-          >
-            See on Google Maps
-          </a>
-        </li>
-      </ul>
-      {sessionUser && sessionUser.id === spotInfo.spotData.userId && (
-        <>
-          <button onClick={handleDelete}>DELETE</button>
-          <button
-            onClick={() => {
-              setEditOpen(true);
-            }}
-          >
-            Edit
-          </button>
-        </>
-      )}
-      {sessionUser && <button onClick={handleReview}>Review</button>}
-      {editOpen && (
-        <EditSpotForm spot={spotInfo.spotData} setEditOpen={setEditOpen} />
-      )}
-      {reviewOpen && (
-        <ReviewFormPage
-          spot={spotInfo.spotData}
-          setReviewOpen={setReviewOpen}
-        />
-      )}
+        </span>
+      </div>
+      <div className={classes.imgContainer}>
+        {spotInfo && spotInfo.images && <SpotPageImages id={id} />}
+      </div>
+      <div className={classes.infoContainer}>
+        <div className={classes.leftInfoCol}>
+          <h2 className={classes.subTittle}>
+            {spotInfo.spotData.shortDescrip}
+          </h2>
+          <p>{spotInfo.spotData.description}</p>
+        </div>
+        <div className={classes.rightInfoCol}>
+          <div className={classes.address}>
+            <img
+              className={classes.arrow}
+              src="/media/locationArrow.svg"
+              alt="arrow indicating address to location"
+            />{' '}
+            <span>{spotInfo.spotData.address}</span>
+            <br />
+            <span>
+              {spotInfo.spotData.city}, {spotInfo.spotData.state}
+            </span>
+            <br />
+            <span>{spotInfo.spotData.country}</span>
+          </div>
+          <div className={classes.coordinates}>
+            <img
+              className={classes.compass}
+              src="/media/compass.svg"
+              alt="compass indicating coordinates to location"
+            />{' '}
+            <span>
+              {spotInfo.spotData.latitude}, {spotInfo.spotData.longitude}
+              <img
+                className={classes.clipboard}
+                src="/media/clipboard.svg"
+                alt="cliboard icon to copy spot coordinates"
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `${spotInfo.spotData.latitude}, ${spotInfo.spotData.longitude}`
+                  );
+                  alert('Coordinates Copied to your clipboard!');
+                }}
+              />
+            </span>
+          </div>
+          <div className={classes.exLink}>
+            <a
+              className={classes.mapsUrl}
+              href={`${parsedUrl(spotInfo.spotData)}`}
+              target="_blank"
+            >
+              See on Google Maps{' '}
+              <img
+                className={classes.external}
+                src="/media/externalLink.svg"
+                alt="icon indicating link is external"
+              />
+            </a>
+          </div>
+        </div>
+        {sessionUser && sessionUser.id === spotInfo.spotData.userId && (
+          <>
+            <button onClick={handleDelete}>DELETE</button>
+            <button
+              onClick={() => {
+                setEditOpen(true);
+              }}
+            >
+              Edit
+            </button>
+          </>
+        )}
+        {sessionUser && <button onClick={handleReview}>Review</button>}
+        {editOpen && (
+          <EditSpotForm spot={spotInfo.spotData} setEditOpen={setEditOpen} />
+        )}
+      </div>
       <div className={classes.reviewContainer}>
+        {reviewOpen && (
+          <ReviewFormPage
+            spot={spotInfo.spotData}
+            setReviewOpen={setReviewOpen}
+          />
+        )}
         {Object.values(spotInfo.reviews).map((review) => {
           return (
             <div className={classes.review} key={review.id}>

@@ -37,19 +37,12 @@
   color: #717171;
 }
 
-/* p {
-  text-align: center;
-} */
-
 .location {
   color: #222222;
   font-weight: 700;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-span {
 }
 
 .star {

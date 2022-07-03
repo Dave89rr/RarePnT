@@ -42,9 +42,7 @@ function Navigation({ isLoaded }) {
             ></img>
           </NavLink>
         </div>
-        <div>
-          <p>[MISSING COMPONENT HERE]</p>
-        </div>
+        <div>{/* <p>[MISSING COMPONENT HERE]</p> */}</div>
         <div className={classes.userInteraction}>
           {isLoaded && sessionLinks}
         </div>

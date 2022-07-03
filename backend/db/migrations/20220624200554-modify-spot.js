@@ -10,6 +10,10 @@ module.exports = {
         type: Sequelize.NUMERIC(10, 7),
         allowNull: true,
       }),
+      queryInterface.addColumn('Spots', 'shortDescrip', {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+      }),
     ]);
   },
   down: (queryInterface, Sequelize) => {
