@@ -4,6 +4,17 @@ body {
 .imgContainer {
   display: flex;
   flex-direction: row;
+  /* border: 2px solid red; */
+}
+@media screen and (min-width: 1440px) {
+  .imgContainer {
+    height: 55.94vh;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .imgContainer {
+    height: 55.94vh;
+  }
 }
 
 .reviewContainer {

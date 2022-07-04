@@ -5,7 +5,14 @@ function SpotPageImages({ id }) {
   const spotInfo = useSelector((state) => state.spots[id]);
 
   if (!spotInfo) return <p>Loading...</p>;
+
   const images = Object.values(spotInfo.images);
+  if (!images.length)
+    return (
+      <div className={classes.imageContainer}>
+        <p>No Images Found</p>
+      </div>
+    );
   const img1 = images[0];
   const img2 = images[1];
   const img3 = images[2];

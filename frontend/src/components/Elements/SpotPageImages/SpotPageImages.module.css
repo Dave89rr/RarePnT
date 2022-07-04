@@ -1,25 +1,27 @@
 .imageContainer {
   width: 58.8545%;
-  height: 541px;
+  height: 100%;
   margin: auto;
   display: flex;
   flex-direction: row;
+  /* border: 2px dashed blue; */
 }
 
+.img1 {
+  height: 100%;
+}
+.img1div {
+  /* border: 2px solid orange; */
+  overflow: hidden;
+  height: 100%;
+  border-radius: 10px 0 0 10px;
+  justify-content: center;
+}
 .secondaryImages {
   height: 100%;
   margin-left: 1%;
   display: flex;
   flex-direction: column;
-}
-.img1 {
-  height: 100%;
-}
-.img1div {
-  overflow: hidden;
-  height: 100%;
-  border-radius: 10px 0 0 10px;
-  justify-content: center;
 }
 .img2 {
   width: 100%;

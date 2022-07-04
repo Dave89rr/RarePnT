@@ -17,7 +17,7 @@ function HomePage() {
   useEffect(() => {
     setTimeout(() => {
       dispatch(getSpotThunk());
-    }, 750);
+    }, 1250);
   }, [dispatch]);
 
   // If first site load, fill page with all blank cards

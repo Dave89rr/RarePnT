@@ -35,6 +35,7 @@ function SpotCard({ spot }) {
     <div className={classes.spotCardContainer}>
       <Link key={spot.spotData.id} to={`/spots/${spot.spotData.id}`}>
         <div className={classes.imageContainer}>
+          <div className={classes.imageContainerFill}></div>
           <img
             className={classes.image}
             src={images}
