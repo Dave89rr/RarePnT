@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import LoginFormPage from './components/Forms/LoginForm';
-import SignupForm from './components/Forms/SignupForm';
+import LoginFormPage from './components/Pages/LoginFormPage';
+import SignupFormPage from './components/Pages/SignupFormPage';
 import * as sessionActions from './store/session';
 import Navigation from './components/Elements/Navigation';
 import SpotForm from './components/Forms/SpotForm';
@@ -32,7 +32,6 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
-
   return (
     <>
       <Navigation isLoaded={isLoaded} />
@@ -45,9 +44,9 @@ function App() {
             <LoginFormPage />
           </Route>
           <Route path="/signup">
-            <SignupForm />
+            <SignupFormPage />
           </Route>
-          <Route path="/spotform">
+          <Route path="/spots/new">
             <SpotForm />
           </Route>
           <Route path="/reviewform">

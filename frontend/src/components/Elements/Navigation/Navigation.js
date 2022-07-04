@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <>
-        <NavLink className={classes.link} to="/spotform">
+        <NavLink className={classes.link} to="/spots/new">
           Become a Host
         </NavLink>
         <ProfileButton user={sessionUser} />
@@ -42,9 +42,7 @@ function Navigation({ isLoaded }) {
             ></img>
           </NavLink>
         </div>
-        <div>
-          <p>[MISSING COMPONENT HERE]</p>
-        </div>
+        <div>{/* <p>[MISSING COMPONENT HERE]</p> */}</div>
         <div className={classes.userInteraction}>
           {isLoaded && sessionLinks}
         </div>

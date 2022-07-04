@@ -14,6 +14,8 @@ a,
 li,
 p,
 h1,
-h2 {
+h2,
+label,
+span {
   font-family: 'Nunito Sans', sans-serif;
 }

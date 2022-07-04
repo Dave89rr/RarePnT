@@ -1,13 +1,6 @@
-.li {
-  display: flex;
-  flex-direction: row;
-  padding: 5px;
-  width: 200px;
-}
-
 .cardsContainer {
   padding-top: 17px;
-  width: 1600px;
+  width: 84.078%;
   display: flex;
   flex-direction: row;
   margin: auto;
@@ -19,3 +12,12 @@ a {
   text-decoration: none;
   color: rgba(54, 54, 54, 0);
 }
+
+/* @keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+} */

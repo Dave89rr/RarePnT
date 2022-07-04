@@ -72,6 +72,12 @@ export const calcAvgRating = (reviewObj) => {
   return 'New ';
 };
 
+/*  Haversine Formula used due to simplicity, however, it gives
+inaccurate distance due to the fact that the formula is used to
+find the distance between two points on a sphere. To get a more
+accurate distance the Vicenty formula would need to be used but
+I neither know it nor understand it, and google says it's very
+resource intensive causing renders to be slow*/
 export const calcDistance = (userCoords, spotCoords) => {
   if (userCoords === undefined) return '';
   let userLatRads = (userCoords.yourLat * Math.PI) / 180;

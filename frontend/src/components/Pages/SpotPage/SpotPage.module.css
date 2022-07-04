@@ -1,14 +1,20 @@
+body {
+  overflow-y: scroll;
+}
 .imgContainer {
   display: flex;
   flex-direction: row;
+  /* border: 2px solid red; */
 }
-.spotImage {
-  width: 200px;
-  height: 200px;
-  border-radius: 7px;
-  box-shadow: 10px 5px 5px black;
-  margin: 30px;
-  object-fit: cover;
+@media screen and (min-width: 1440px) {
+  .imgContainer {
+    height: 55.94vh;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .imgContainer {
+    height: 55.94vh;
+  }
 }
 
 .reviewContainer {
@@ -16,14 +22,81 @@
   flex-direction: column;
 }
 
-/* .review {
-} */
-a {
-  /* color: blue;
-  text-decoration: underline; */
-}
-
 .mapsUrl {
   text-decoration: underline;
   color: blue;
+}
+
+.spotTitle {
+  margin-left: 20.546%;
+  margin-bottom: 0%;
+  font-weight: 600;
+}
+
+.quickInfo {
+  margin-left: 20.546%;
+  margin-bottom: 1%;
+}
+
+/* SVG Sizing */
+.star,
+.arrow,
+.external {
+  height: 12px;
+  width: 12px;
+}
+.compass,
+.clipboard {
+  height: 15px;
+  width: 15px;
+}
+
+.infoContainer {
+  margin: auto;
+  margin-top: 2.25%;
+  width: 58.8545%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.reviewContainer {
+  display: flex;
+  flex-direction: column;
+  width: 58.8545%;
+  margin: auto;
+}
+
+.subTittle {
+  margin-top: 0;
+}
+
+.leftInfoCol {
+  display: flex;
+  flex-direction: column;
+  width: 62.3%;
+}
+
+.rightInfoCol {
+  width: 33.393%;
+  height: fit-content;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgb(230, 230, 230);
+  display: flex;
+  flex-direction: column;
+}
+
+.address {
+  margin-top: 6%;
+  margin-left: 6%;
+}
+
+.coordinates {
+  margin-top: 3%;
+  margin-left: 6%;
+}
+.exLink {
+  margin-left: 6%;
+  margin-top: 2%;
+  margin-bottom: 5%;
 }

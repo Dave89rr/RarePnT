@@ -39,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         type: DataTypes.NUMERIC(7, 4),
       },
+      shortDescrip: {
+        allowNull: false,
+        type: DataTypes.STRING(60),
+      },
     },
     {}
   );
