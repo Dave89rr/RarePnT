@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import classes from './LoginForm.module.css';
 
-function LoginForm() {
+function LoginFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState('');
@@ -91,4 +91,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LoginFormPage;
