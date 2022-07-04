@@ -46,7 +46,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/spotform">
+          <Route path="/spots/new">
             <SpotForm />
           </Route>
           <Route path="/reviewform">

@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <>
-        <NavLink className={classes.link} to="/spotform">
+        <NavLink className={classes.link} to="/spots/new">
           Become a Host
         </NavLink>
         <ProfileButton user={sessionUser} />
