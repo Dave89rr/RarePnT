@@ -112,32 +112,6 @@
   background-image: linear-gradient(to right);
   background-position: 100%, 0%;
 }
-.formBtnDemo {
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  width: 100%;
-  border-radius: 10px;
-  height: 3rem;
-  border: none;
-  cursor: pointer;
-  background-image: linear-gradient(
-    to right,
-    #e61e4d,
-    #d70466,
-    #bd1e59,
-    #f52d56
-  );
-  background-size: 200%, 100%;
-  background-position: 0%, 0%;
-  transition: 1s;
-}
-
-.formBtnDemo:hover {
-  transition: 1s;
-  background-image: linear-gradient(to right);
-  background-position: 100%, 0%;
-}
 
 .loginLink {
   text-decoration: underline;

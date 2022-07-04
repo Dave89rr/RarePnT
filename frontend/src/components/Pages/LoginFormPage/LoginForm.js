@@ -47,7 +47,7 @@ function LoginFormPage() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <div className={classes.usernameContainer}>
+        <div className={classes.inputContainer}>
           <input
             className={classes.usernameInput}
             id="emailorusername"
@@ -60,7 +60,7 @@ function LoginFormPage() {
             Username or Email
           </label>
         </div>
-        <div className={classes.passwordContainer}>
+        <div className={classes.inputContainer}>
           <input
             className={classes.passwordInput}
             type="password"
@@ -83,7 +83,7 @@ function LoginFormPage() {
       <div className={classes}>
         <h2>Or</h2>
         <p>Try out the site without signup</p>
-        <button className={classes.formBtnDemo} onClick={handleDemo}>
+        <button className={classes.formBtn} onClick={handleDemo}>
           Demo User
         </button>
       </div>

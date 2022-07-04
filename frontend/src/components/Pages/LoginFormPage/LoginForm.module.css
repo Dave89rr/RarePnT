@@ -15,15 +15,16 @@
   width: 100%;
 }
 
-.usernameContainer {
+.inputContainer {
+  margin-top: 0.2rem;
   display: flex;
   flex-direction: column;
   position: relative;
 }
-.usernameContainer input {
+.inputContainer input {
   border: 1px solid rgb(175, 175, 175);
 }
-.usernameContainer label {
+.inputContainer label {
   position: absolute;
   pointer-events: none;
   transform: translate(1rem, 1.5rem) scale(1);
@@ -35,16 +36,16 @@
   left: 1rem;
 }
 
-.usernameContainer:focus-within label {
+.inputContainer:focus-within label {
   transform: translate(1rem, 0.8rem) scale(0.8);
   color: #0a53e4;
 }
 
-.usernameContainer .filled {
+.inputContainer .filled {
   transform: translate(1rem, 0.8rem) scale(0.8);
 }
 
-.usernameContainer input:focus {
+.inputContainer input:focus {
   border: 0.1px solid rgb(175, 175, 175);
   box-shadow: 0 0 0 2px #79b1ff;
   outline: none;
@@ -58,41 +59,6 @@
   border: 1px solid rgb(175, 175, 175);
 }
 
-.passwordContainer {
-  margin-top: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-.passwordContainer input {
-  border: 1px solid rgb(175, 175, 175);
-}
-.passwordContainer label {
-  position: absolute;
-  pointer-events: none;
-  transform: translate(1rem, 1.5rem) scale(1);
-  transform-origin: top left;
-  transition: 200ms 0ms;
-  color: rgb(145, 145, 145);
-  font-size: 16px;
-  line-height: 1;
-  left: 1rem;
-}
-
-.passwordContainer:focus-within label {
-  transform: translate(1rem, 0.8rem) scale(0.8);
-  color: #0a53e4;
-}
-
-.passwordContainer .filled {
-  transform: translate(1rem, 0.8rem) scale(0.8);
-}
-
-.passwordContainer input:focus {
-  border: 0.1px solid rgb(175, 175, 175);
-  box-shadow: 0 0 0 2px #79b1ff;
-  outline: none;
-}
 .passwordInput {
   border-radius: 0px 0px 10px 10px;
   height: 3.5rem;
@@ -134,32 +100,6 @@
 }
 
 .formBtn:hover {
-  transition: 1s;
-  background-image: linear-gradient(to right);
-  background-position: 100%, 0%;
-}
-.formBtnDemo {
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  width: 100%;
-  border-radius: 10px;
-  height: 3rem;
-  border: none;
-  cursor: pointer;
-  background-image: linear-gradient(
-    to right,
-    #e61e4d,
-    #d70466,
-    #bd1e59,
-    #f52d56
-  );
-  background-size: 200%, 100%;
-  background-position: 0%, 0%;
-  transition: 1s;
-}
-
-.formBtnDemo:hover {
   transition: 1s;
   background-image: linear-gradient(to right);
   background-position: 100%, 0%;

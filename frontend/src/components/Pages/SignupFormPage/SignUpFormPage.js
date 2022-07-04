@@ -107,7 +107,7 @@ function SignupFormPage() {
       <div>
         <h2>Or</h2>
         <p>Try out the site without signup</p>
-        <button className={classes.formBtnDemo} onClick={handleDemo}>
+        <button className={classes.formBtn} onClick={handleDemo}>
           Demo User
         </button>
       </div>
