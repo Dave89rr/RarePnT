@@ -108,9 +108,6 @@ router.post(
 
     const spot = await Spot.create(spotInfo.spot);
 
-    console.log('\n\n\n\n\n\n*****************************');
-    console.log(spotInfo);
-
     const img1 = await Image.create({
       spotId: spot.id,
       url: spotInfo.imgUrls[0],
@@ -158,6 +155,7 @@ router.put(
     editSpot.description = req.body.description;
     editSpot.latitude = req.body.latitude;
     editSpot.longitude = req.body.longitude;
+    editSpot.shortDescrip = req.body.shortDescrip;
     editSpot.save();
 
     res.send({ message: 'Edit Successful', editSpot });

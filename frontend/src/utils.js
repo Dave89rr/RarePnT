@@ -1,16 +1,12 @@
 // Degree Decimal to Degree Minutes Seconds format
 const ddtodms = (inputNumber) => {
-  //   console.log('input', inputNumber);
   const number = parseFloat(inputNumber);
-  //   console.log('number', number);
   let degrees = number;
-  //   console.log('degrees', degrees);
   if (degrees > 0) {
     degrees = Math.floor(degrees);
   } else {
     degrees = Math.ceil(degrees);
   }
-  //   console.log('degreesFloored', degrees);
   let minutes = number - degrees;
   minutes *= 60;
   let seconds = minutes;

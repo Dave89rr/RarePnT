@@ -52,9 +52,9 @@ function ProfileButton({ user }) {
               <div className={classes.menuItem}>
                 <span>{user.username}</span>
               </div>
-              <div className={classes.menuItem}>
+              {/* <div className={classes.menuItem}>
                 <span>{user.email}</span>
-              </div>
+              </div> */}
               <div className={classes.menuItem}>
                 <span className={classes.logoutLink} onClick={logout}>
                   Log Out

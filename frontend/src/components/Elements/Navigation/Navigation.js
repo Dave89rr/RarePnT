@@ -60,7 +60,16 @@ function Navigation({ isLoaded }) {
             ></img>
           </NavLink>
         </div>
-        <div>{/* <p>[MISSING COMPONENT HERE]</p> */}</div>
+        <div>
+          <a
+            className={classes.link}
+            href="https://github.com/dave89rr"
+            target="_blank"
+            rel="noreferrer"
+          >
+            About
+          </a>
+        </div>
         <div className={classes.userInteraction}>
           {isLoaded && sessionLinks}
         </div>

@@ -51,3 +51,53 @@ RarePnT (Rare Places and Travel) is an AirBnB clone focused on helping people tr
 ## [Features List](https://github.com/Dave89rr/RarePnT/wiki/Features-List)
 
 ## [State Shape](https://github.com/Dave89rr/RarePnT/wiki/State-Shape)
+
+## Installation Instructions
+
+Clone or download code to your machine and in the terminal once in the project folder:
+
+### Backend Setup
+
+In your terminal
+
+- cd into the backend folder
+- npm install
+
+This will setup all back end dependencies and setup the server.
+
+### DB Setup
+
+Create a psql db user with createdb privileges.
+
+Duplicate the .env.example for the dotenv package.
+
+Update the following variables:
+
+PORT the port that the server will listen to, 8080 by default
+DB_USERNAME the user of the created psql db user
+DB_PASSWORD the password for the psql db user
+SESSION_SECRET a session secret key for encrypting session id's in the database
+All other variables should remain the same
+Setup PostgreSQL database
+
+Run npx dotenv sequelize db:create
+Run npx dotenv sequelize db:migrate
+Run npx dotenv sequelize db:seed:all
+
+Only user seeds are provided.
+
+The backend server will start on http://localhost:8080
+
+### Front End Setup
+
+- cd into the frontend folder
+- npm install
+
+### Starting servers and testing
+
+- cd into backend
+  - npm start
+- cd into frontend
+  - npm start
+
+The frontend server will be live on http://localhost:3000 by default and you'll be able to test the site locally
