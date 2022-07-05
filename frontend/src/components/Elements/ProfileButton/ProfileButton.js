@@ -32,8 +32,12 @@ function ProfileButton({ user }) {
   return (
     <>
       <div>
-        <div className={classes.testDiv}>
-          <img className={classes.menuIcon} src="/media/menu.svg" alt="menu button" />
+        <div className={classes.menuButton}>
+          <img
+            className={classes.menuIcon}
+            src="/media/menu.svg"
+            alt="menu button"
+          />
           <img
             className={classes.profileIcon}
             src="/media/profileicon.svg"
@@ -47,15 +51,17 @@ function ProfileButton({ user }) {
         {showMenu && (
           <div className={classes.safetyNet}>
             <div className={classes.userMenu}>
-              <ul className="profile-dropdown">
-                <li>{user.username}</li>
-                <li>{user.email}</li>
-                <li>
-                  <div>
-                    <button onClick={logout}>Log Out</button>
-                  </div>
-                </li>
-              </ul>
+              <div className={classes.menuItem}>
+                <span>{user.username}</span>
+              </div>
+              <div className={classes.menuItem}>
+                <span>{user.email}</span>
+              </div>
+              <div className={classes.menuItem}>
+                <span className={classes.logoutLink} onClick={logout}>
+                  Log Out
+                </span>
+              </div>
             </div>
           </div>
         )}

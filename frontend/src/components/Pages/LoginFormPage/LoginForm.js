@@ -34,7 +34,7 @@ function LoginFormPage() {
       })
     );
   };
-
+  
   return (
     <div className={classes.formContainer}>
       <h2>Login</h2>

@@ -2,20 +2,22 @@
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 0px 15px #ebebeb;
-  width: 250px;
+  width: 7%;
   height: fit-content;
   z-index: 12;
   border: 1px solid #ebebeb;
+  /* border: 1px solid red; */
   position: absolute;
   right: 7.961%;
   top: 7.5%;
 }
 
-.testDiv {
+.menuButton {
   margin-left: 10px;
-  width: 50px;
-  border: 1px solid red;
-  border-radius: 10px;
+  width: 55px;
+  border: 1px solid #dddddd;
+  padding: 7%;
+  border-radius: 30px;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -31,7 +33,19 @@
 }
 
 .menuIcon {
+  padding-left: 5px;
   height: 12px;
   width: 12px;
+  cursor: pointer;
+}
+
+.menuItem {
+  margin-left: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.logoutLink {
+  text-decoration: underline;
   cursor: pointer;
 }

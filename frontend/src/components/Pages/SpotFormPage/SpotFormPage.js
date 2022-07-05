@@ -24,10 +24,15 @@ function SpotFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO - Validation Errors
-    setErrors([]);
-    if (latitude.length === 0) setLatitude(0.0);
-    if (!longitude) setLongitude(0);
+    const errors = [];
+    if (!isFinite(latitude))
+      errors.push('Please input a number with decimal for latitude');
+    if (!latitude.length) errors.push('Please provide a latitude');
+    if (!isFinite(longitude))
+      errors.push('Please input a number with decimal for longitude');
+    if (!longitude.length) errors.push('Please provide a latitude');
+
+    setErrors(errors);
     const spot = {
       userId: sessionUser.id,
       name,
@@ -40,24 +45,45 @@ function SpotFormPage() {
       longitude,
       shortDescrip,
     };
-    dispatch(addSpot(spot));
 
-    setName('');
-    setAddress('');
-    setCity('');
-    setState('');
-    setCountry('');
-    setDescription('');
-    setLatitude('');
-    setLongitude('');
-    setShortDescrip('');
+    if (!errors.length) {
+      dispatch(addSpot(spot));
 
-    history.push('/');
+      setName('');
+      setAddress('');
+      setCity('');
+      setState('');
+      setCountry('');
+      setDescription('');
+      setLatitude('');
+      setLongitude('');
+      setShortDescrip('');
+
+      history.push('/');
+    }
   };
 
   const handleNext = (e) => {
     e.preventDefault();
-    setStep(step + 1);
+    const errors = [];
+    if (step === 1) {
+      if (!name.length) errors.push('Please provide a name for the spot');
+      if (shortDescrip.length > 255)
+        errors.push('Short Description must be less than 255 characters');
+      if (!shortDescrip.length)
+        errors.push('Please provide a short description');
+      if (!description.length)
+        errors.push('Please provide details for the spot');
+    }
+    if (step === 2) {
+      if (!address.length) errors.push('Please provide an address');
+      if (!city.length) errors.push('Please provide a city');
+      if (!state.length) errors.push('Please provide a state');
+      if (!country.length) errors.push('Please provide a country');
+    }
+
+    setErrors(errors);
+    if (!errors.length) setStep(step + 1);
   };
   const handlePrev = (e) => {
     e.preventDefault();
@@ -199,7 +225,7 @@ function SpotFormPage() {
           ''
         )}
         {step === 3 ? (
-          <button className={classes.formBtn} type="submit">
+          <button disabled={!errors} className={classes.formBtn} type="submit">
             Submit
           </button>
         ) : (
