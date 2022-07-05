@@ -32,11 +32,12 @@ function ProfileButton({ user }) {
   return (
     <>
       <div>
-        <div className={classes.menuButton}>
+        <div className={classes.menuButton} onClick={openMenu}>
           <img
             className={classes.menuIcon}
             src="/media/menu.svg"
             alt="menu button"
+            onClick={openMenu}
           />
           <img
             className={classes.profileIcon}
@@ -44,9 +45,6 @@ function ProfileButton({ user }) {
             alt="user profile"
             onClick={openMenu}
           />
-          {/* <button>
-            <i className="fas fa-user-circle" />
-          </button> */}
         </div>
         {showMenu && (
           <div className={classes.safetyNet}>

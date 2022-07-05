@@ -106,7 +106,23 @@ router.post(
   asyncHandler(async (req, res) => {
     const spotInfo = req.body;
 
-    const spot = await Spot.create(spotInfo);
+    const spot = await Spot.create(spotInfo.spot);
+
+    console.log('\n\n\n\n\n\n*****************************');
+    console.log(spotInfo);
+
+    const img1 = await Image.create({
+      spotId: spot.id,
+      url: spotInfo.imgUrls[0],
+    });
+    const img2 = await Image.create({
+      spotId: spot.id,
+      url: spotInfo.imgUrls[1],
+    });
+    const img3 = await Image.create({
+      spotId: spot.id,
+      url: spotInfo.imgUrls[2],
+    });
 
     return res.send({ spot });
   })
