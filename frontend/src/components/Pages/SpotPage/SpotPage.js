@@ -108,6 +108,7 @@ function SpotPage() {
               className={classes.mapsUrl}
               href={`${parsedUrl(spotInfo.spotData)}`}
               target="_blank"
+              rel="noreferrer"
             >
               See on Google Maps{' '}
               <img

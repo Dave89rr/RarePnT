@@ -5,7 +5,7 @@ import LoginFormPage from './components/Pages/LoginFormPage';
 import SignupFormPage from './components/Pages/SignupFormPage';
 import * as sessionActions from './store/session';
 import Navigation from './components/Elements/Navigation';
-import SpotForm from './components/Forms/SpotForm';
+import SpotForm from './components/Pages/SpotFormPage';
 import AddReviewForm from './components/Forms/ReviewForm';
 import EditSpotForm from './components/Forms/EditSpotForm';
 import HomePage from './components/Pages/Homepage';

@@ -1,0 +1,37 @@
+.userMenu {
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 0px 15px #ebebeb;
+  width: 250px;
+  height: fit-content;
+  z-index: 12;
+  border: 1px solid #ebebeb;
+  position: absolute;
+  right: 7.961%;
+  top: 7.5%;
+}
+
+.testDiv {
+  margin-left: 10px;
+  width: 50px;
+  border: 1px solid red;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  right: 0;
+}
+
+.profileIcon {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.menuIcon {
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
