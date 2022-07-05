@@ -11,7 +11,7 @@ function HomePage() {
   const spotsArray = Object.values(spots);
   let loaded = Object.values(spots).length;
 
-  /*Couldn't figure out component transition (fade in) without using external
+  /* Couldn't figure out component transition (fade in) without using external
   libraries had to use useEffect to diminish weird flashing of blank cards
   followed by filled cards by using a delay on the dispatch */
   useEffect(() => {

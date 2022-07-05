@@ -1,18 +1,29 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+import ProfileButton from '../ProfileButton';
 import classes from './Navigation.module.css';
+import { useDispatch } from 'react-redux';
+import * as sessionActions from '../../../store/session';
 
 function Navigation({ isLoaded }) {
+  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-
+  const handleDemo = (e) => {
+    e.stopPropagation();
+    return dispatch(
+      sessionActions.login({
+        credential: 'Demo-lition',
+        password: 'password',
+      })
+    );
+  };
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <>
         <NavLink className={classes.link} to="/spots/new">
-          Become a Host
+          New Spot
         </NavLink>
         <ProfileButton user={sessionUser} />
       </>
@@ -20,6 +31,13 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
+        <NavLink
+          className={classes.link}
+          onClick={handleDemo}
+          to={window.location.pathname}
+        >
+          Demo User
+        </NavLink>
         <NavLink className={classes.link} to="/login">
           Log In
         </NavLink>

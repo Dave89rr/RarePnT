@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addReviewThunk } from '../../../store/spots';
+import classes from './ReviewForm.module.css';
 
 function AddReviewForm({ spot, setReviewOpen }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -11,45 +12,55 @@ function AddReviewForm({ spot, setReviewOpen }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO - Validation Errors
-    setErrors([]);
+    const ratingRegex = new RegExp('^(?!.*[a-zA-Z]).*$');
+    const errors = [];
+    if (rating < 1 || rating > 5) errors.push('Rating must be between 1 and 5');
+    if (!ratingRegex.test(rating)) errors.push('Rating must be a number');
+    setErrors(errors);
     const reviewInput = {
       userId: sessionUser.id,
       spotId: spot.id,
-      rating,
+      rating: parseInt(rating, 10),
       review,
     };
-    dispatch(addReviewThunk(reviewInput, spot.id));
-    setReviewOpen(false);
+    if (!errors.length) {
+      dispatch(addReviewThunk(reviewInput, spot.id));
+      setReviewOpen(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, id) => (
-          <li key={id}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Rating
-        <input
-          type="text"
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Review
-        <input
-          type="text"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-        />
-      </label>
-
-      <button type="submit">Submit</button>
-    </form>
+    <div className={classes.form}>
+      <form onSubmit={handleSubmit}>
+        <ul>
+          {errors.map((error, id) => (
+            <li key={id}>{error}</li>
+          ))}
+        </ul>
+        <div className={classes.formInputContainer}>
+          <input
+            type="text"
+            value={rating}
+            className={classes.topInput}
+            onChange={(e) => setRating(e.target.value)}
+            required
+          />
+          <label className={rating && classes.filled}>Rating</label>
+        </div>
+        <div className={classes.formInputContainer}>
+          <input
+            type="text"
+            value={review}
+            className={classes.bottomInput}
+            onChange={(e) => setReview(e.target.value)}
+          />
+          <label className={review && classes.filled}>Review</label>
+        </div>
+        <button className={classes.formBtn} type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
 

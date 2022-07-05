@@ -68,6 +68,7 @@ function SpotPage() {
           <p>{spotInfo.spotData.description}</p>
         </div>
         <div className={classes.rightInfoCol}>
+          <h2 className={classes.locationTitle}>Location</h2>
           <div className={classes.address}>
             <img
               className={classes.arrow}
@@ -108,6 +109,7 @@ function SpotPage() {
               className={classes.mapsUrl}
               href={`${parsedUrl(spotInfo.spotData)}`}
               target="_blank"
+              rel="noreferrer"
             >
               See on Google Maps{' '}
               <img
@@ -117,48 +119,75 @@ function SpotPage() {
               />
             </a>
           </div>
+          {sessionUser && sessionUser.id === spotInfo.spotData.userId && (
+            <div className={classes.actionContainer}>
+              <button
+                className={classes.btn}
+                onClick={() => {
+                  setEditOpen(true);
+                }}
+              >
+                Edit
+              </button>
+              <button className={classes.delBtn} onClick={handleDelete}>
+                DELETE
+              </button>
+            </div>
+          )}
         </div>
-        {sessionUser && sessionUser.id === spotInfo.spotData.userId && (
-          <>
-            <button onClick={handleDelete}>DELETE</button>
-            <button
-              onClick={() => {
-                setEditOpen(true);
-              }}
-            >
-              Edit
-            </button>
-          </>
-        )}
-        {sessionUser && <button onClick={handleReview}>Review</button>}
+      </div>
+      <div className={classes.formContainer}>
         {editOpen && (
           <EditSpotForm spot={spotInfo.spotData} setEditOpen={setEditOpen} />
         )}
       </div>
+      <hr className={classes.bar} />
       <div className={classes.reviewContainer}>
+        <div className={classes.revieSectionTitle}>
+          <h2>
+            <img
+              className={classes.biggerStar}
+              src="/media/star.svg"
+              alt="spot's star rating icon"
+            ></img>{' '}
+            {calcAvgRating(spotInfo.reviews)}
+            {' · '}
+            {Object.values(spotInfo.reviews).length} reviews
+          </h2>
+          {sessionUser && (
+            <button className={classes.btnRev} onClick={handleReview}>
+              Review
+            </button>
+          )}
+        </div>
         {reviewOpen && (
           <ReviewFormPage
             spot={spotInfo.spotData}
             setReviewOpen={setReviewOpen}
           />
         )}
-        {Object.values(spotInfo.reviews).map((review) => {
-          return (
-            <div className={classes.review} key={review.id}>
-              <h2>
-                {review.User.username} - {review.rating}/5
-              </h2>
-              <p>{review.review}</p>
-              {sessionUser && sessionUser.id === review.userId && (
-                <>
-                  <button onClick={() => handleReviewDelete(review.id)}>
-                    DELETE
-                  </button>
-                </>
-              )}
-            </div>
-          );
-        })}
+        <div className={classes.reviews}>
+          {Object.values(spotInfo.reviews).map((review) => {
+            return (
+              <div className={classes.review} key={review.id}>
+                <h2>
+                  {review.User.username} - {review.rating}/5
+                </h2>
+                <p>{review.review}</p>
+                {sessionUser && sessionUser.id === review.userId && (
+                  <>
+                    <button
+                      className={classes.delBtn}
+                      onClick={() => handleReviewDelete(review.id)}
+                    >
+                      DELETE
+                    </button>
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,119 @@
+@media screen and (min-width: 1440px) {
+  .formContainer {
+    width: 25%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 1439px) {
+  .formContainer {
+    width: 55%;
+    margin: auto;
+  }
+}
+
+.form {
+  width: 47.5%;
+}
+
+.formInputContainer {
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.formInputContainer input {
+  border: 1px solid rgb(175, 175, 175);
+}
+.formInputContainer label {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(1rem, 1.5rem) scale(1);
+  transform-origin: top left;
+  transition: 200ms 0ms;
+  color: rgb(145, 145, 145);
+  font-size: 16px;
+  line-height: 1;
+  left: 1rem;
+}
+
+.formInputContainer:focus-within label {
+  transform: translate(1rem, 0.8rem) scale(0.8);
+  color: #0a53e4;
+}
+
+.formInputContainer .filled {
+  transform: translate(1rem, 0.8rem) scale(0.8);
+}
+
+.formInputContainer input:focus {
+  border: 0.1px solid rgb(175, 175, 175);
+  box-shadow: 0 0 0 2px #79b1ff;
+  outline: none;
+}
+.topInput {
+  border-radius: 10px 10px 0px 0px;
+  height: 3.5rem;
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+  font-size: 16px;
+  border: 1px solid rgb(175, 175, 175);
+}
+
+.midInput {
+  height: 3.5rem;
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+  font-size: 16px;
+  border: 1px solid rgb(175, 175, 175);
+}
+
+.bottomInput {
+  border-radius: 0px 0px 10px 10px;
+  height: 3.5rem;
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+  font-size: 16px;
+  border: 1px solid rgb(175, 175, 175);
+}
+
+@keyframes buttonHover {
+  0% {
+    background-image: linear-gradient(to right, #e61e4d, #d70466);
+  }
+  100% {
+    background-image: linear-gradient(to right, #bd1e59, blue);
+  }
+}
+
+.formBtn {
+  margin-top: 1rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 100%;
+  border-radius: 10px;
+  height: 3rem;
+  border: none;
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right,
+    #e61e4d,
+    #d70466,
+    #bd1e59,
+    #f52d56
+  );
+  background-size: 200%, 100%;
+  background-position: 0%, 0%;
+  transition: 1s;
+}
+
+.formBtn:hover {
+  transition: 1s;
+  background-image: linear-gradient(to right);
+  background-position: 100%, 0%;
+}
+
+.loginLink {
+  text-decoration: underline;
+  color: blue;
+}

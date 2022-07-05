@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
 import { editSpotThunk } from '../../../store/spots';
+import classes from './EditSpotForm.module.css';
 
 function EditSpotForm({ spot, setEditOpen }) {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function EditSpotForm({ spot, setEditOpen }) {
   const [description, setDescription] = useState(spot.description);
   const [latitude, setLatitude] = useState(spot.latitude);
   const [longitude, setLongitude] = useState(spot.longitude);
+  const [shortDescrip, setShortDescrip] = useState(spot.shortDescrip);
   const [errors, setErrors] = useState([]);
   const { id } = useParams();
 
@@ -23,10 +25,12 @@ function EditSpotForm({ spot, setEditOpen }) {
     e.preventDefault();
     // TODO - Validation Errors
     setErrors([]);
+    console.log(shortDescrip);
     const spot = {
       id,
       userId: sessionUser.id,
       name,
+      shortDescrip,
       address,
       city,
       state,
@@ -35,99 +39,122 @@ function EditSpotForm({ spot, setEditOpen }) {
       latitude,
       longitude,
     };
-
+    console.log(spot);
     dispatch(editSpotThunk(spot));
     setEditOpen(false);
     return;
   };
+
   const handleCancel = (e) => {
     e.preventDefault();
     setEditOpen(false);
   };
 
   return (
-    <>
-      <h1>EDIT Spot</h1>
+    <div className={classes.formContainer}>
+      <h2>EDIT Spot</h2>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, id) => (
             <li key={id}>{error}</li>
           ))}
         </ul>
-        <label>
-          Name
+        <div className={classes.formInputContainer}>
           <input
             type="text"
             value={name}
+            className={classes.topInput}
             onChange={(e) => setName(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Address
+          <label className={classes.filled}>Name</label>
+        </div>
+        <div className={classes.formInputContainer}>
           <input
             type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
+            value={shortDescrip}
+            className={classes.midInput}
+            onChange={(e) => setShortDescrip(e.target.value)}
           />
-        </label>
-        <label>
-          City
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          State
-          <input
-            type="text"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Country
-          <input
-            type="text"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Description
+          <label className={classes.filled}>Short Description</label>
+        </div>
+        <div className={classes.formInputContainer}>
           <textarea
             type="text"
             value={description}
+            className={classes.textareaInput}
             onChange={(e) => setDescription(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Latitude
+          <label className={classes.filled}>Details</label>
+        </div>
+        <div className={classes.formInputContainer}>
+          <input
+            type="text"
+            value={address}
+            className={classes.midInput}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+          <label className={classes.filled}>Address</label>
+        </div>
+        <div className={classes.formInputContainer}>
+          <input
+            type="text"
+            value={city}
+            className={classes.midInput}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          />
+          <label className={classes.filled}>City</label>
+        </div>
+        <div className={classes.formInputContainer}>
+          <input
+            type="text"
+            value={state}
+            className={classes.midInput}
+            onChange={(e) => setState(e.target.value)}
+            required
+          />
+          <label className={classes.filled}>State</label>
+        </div>
+        <div className={classes.formInputContainer}>
+          <input
+            type="text"
+            value={country}
+            className={classes.midInput}
+            onChange={(e) => setCountry(e.target.value)}
+            required
+          />
+          <label className={classes.filled}>Country</label>
+        </div>
+
+        <div className={classes.formInputContainer}>
           <input
             type="text"
             value={latitude}
+            className={classes.midInput}
             onChange={(e) => setLatitude(e.target.value)}
           />
-        </label>
-        <label>
-          Longitude
+          <label className={classes.filled}>Latitude</label>
+        </div>
+        <div className={classes.formInputContainer}>
           <input
             type="text"
             value={longitude}
+            className={classes.bottomInput}
             onChange={(e) => setLongitude(e.target.value)}
           />
-        </label>
-        <button type="submit">Submit</button>
-        <button onClick={() => handleCancel}>Cancel</button>
+          <label className={classes.filled}>Longitude</label>
+        </div>
+        <button className={classes.formBtn} type="submit">
+          Submit
+        </button>
+        <button className={classes.cancelBtn} onClick={() => handleCancel}>
+          Cancel
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 

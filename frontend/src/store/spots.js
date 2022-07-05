@@ -19,10 +19,10 @@ const REMOVE_REVIEW = 'spot/REMOVE_REVIEW';
 
 //**************** SPOT ACTIONS *****************************//
 // Actions
-const addSpotAction = (spot) => {
+const addSpotAction = (spot, images) => {
   return {
     type: ADD_SPOT,
-    spot,
+    payload: { spot, images },
   };
 };
 
@@ -70,13 +70,13 @@ const removeReviewAction = (payload) => {
 };
 
 //**************** SPOT THUNKS ******************************//
-export const addSpot = (spot) => async (dispatch) => {
-  const response = await csrfFetch('/api/spots', {
+export const addSpotThunk = (spot, imgUrls) => async (dispatch) => {
+  const spotResponse = await csrfFetch('/api/spots', {
     method: 'POST',
-    body: JSON.stringify(spot),
+    body: JSON.stringify({ spot, imgUrls }),
   });
 
-  const data = await response.json();
+  const data = await spotResponse.json();
 
   dispatch(addSpotAction(data.spot));
   return null;
