@@ -23,9 +23,27 @@ function EditSpotForm({ spot, setEditOpen }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO - Validation Errors
-    setErrors([]);
-    console.log(shortDescrip);
+    const errors = [];
+    if (!name.length) errors.push('Please provide a name for the spot');
+    if (shortDescrip.length > 255)
+      errors.push('Short Description must be less than 255 characters');
+    if (!shortDescrip.length) errors.push('Please provide a short description');
+    if (!description.length) errors.push('Please provide details for the spot');
+    if (!address.length) errors.push('Please provide an address');
+    if (!city.length) errors.push('Please provide a city');
+    if (!state.length) errors.push('Please provide a state');
+    if (!country.length) errors.push('Please provide a country');
+    if (!isFinite(latitude))
+      errors.push('Please input a number with decimal for latitude');
+    if (Math.abs(latitude) > 90)
+      errors.push('Latitude must be within -90 and 90 degrees');
+    if (!latitude.length) errors.push('Please provide a latitude');
+    if (!isFinite(longitude))
+      errors.push('Please input a number with decimal for longitude');
+    if (!longitude.length) errors.push('Please provide a latitude');
+    if (Math.abs(longitude) > 180)
+      errors.push('Longitude must be within -180 and 180 degrees');
+    setErrors(errors);
     const spot = {
       id,
       userId: sessionUser.id,
@@ -39,10 +57,11 @@ function EditSpotForm({ spot, setEditOpen }) {
       latitude,
       longitude,
     };
-    console.log(spot);
-    dispatch(editSpotThunk(spot));
-    setEditOpen(false);
-    return;
+    if (!errors.length) {
+      dispatch(editSpotThunk(spot));
+      setEditOpen(false);
+      return;
+    }
   };
 
   const handleCancel = (e) => {

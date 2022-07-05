@@ -127,7 +127,7 @@ export const addReviewThunk = (review, spotId) => async (dispatch) => {
   if (data.message === undefined) {
     dispatch(addReviewAction({ review: data.review, spotId }));
   } else {
-    return null;
+    alert('Only 1 review allowed per site');
   }
   return null;
 };
@@ -146,9 +146,9 @@ const spotReducer = (state = {}, action) => {
   let id;
   switch (action.type) {
     case ADD_SPOT:
-      id = action.spot.id;
+      id = action.payload.spot.id;
       newState[id] = {
-        spotData: action.spot,
+        spotData: action.payload.spot,
         reviews: {},
         images: {},
       };

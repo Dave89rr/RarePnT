@@ -73,7 +73,6 @@ function SpotFormPage() {
 
     if (!errors.length) {
       dispatch(addSpotThunk(spot, imgUrls));
-      console.log(imgUrls);
 
       setName('');
       setAddress('');
